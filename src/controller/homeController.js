@@ -1,5 +1,20 @@
+const connection = require("../config/Database");
+
+
+
 const getHomepage = (req, res) => {
-  res.send("Hello World! abcxyz");
+  let users = [];
+
+  connection.query("SELECT  * from Users u ", function (err, result, fields) {
+    users = result
+    console.log(">>> check result: ", result);
+
+    console.log(">>> check users: ", users)
+
+    //stringify là convert mảng thành string 
+    res.send(JSON.stringify(users));
+  });
+  
 };
 const getAbc = (req, res) => {
   res.send(">>Check Abc!");
@@ -10,5 +25,5 @@ const getCannie = (req, res) => {
 module.exports = {
   getHomepage,
   getAbc,
-  getCannie
+  getCannie,
 };
